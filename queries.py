@@ -66,14 +66,13 @@ class SQLQuery():
         conn.close()
         return columns
 
-    def insert_data_from_csv(self):
+    def insert_data_from_csv(self, csv_file):
         if self.db_name == None:
             self.db_name = input("Enter name of database: ")
         conn = pyodbc.connect("driver={%s};server=%s;database=%s;trusted_connection=true" % (self.driver, self.server, self.db_name),autocommit=True)
         cur = conn.cursor()
         if self.table_name == None:
             self.table_name = input("Enter table name to insert data into: ")
-        csv_file = input("Enter path to csv file: ")
         with open (csv_file, 'r') as f:
             reader = csv.reader(f)
             columns = next(reader)
@@ -89,10 +88,10 @@ class SQLQuery():
                 pass
 
 
-SQL = SQLQuery("SQL Server", ".\SQLExpress", "Lab8", "Student")
+# SQL = SQLQuery("SQL Server", ".\SQLExpress", "Lab8", "Student")
 # SQL.get_tables()
 # SQL.get_columns()
-SQL.insert_data_from_csv()
+# SQL.insert_data_from_csv()
 
 
 # with open('students.csv') as csv_file:
